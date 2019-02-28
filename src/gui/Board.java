@@ -42,12 +42,12 @@ public class Board extends JPanel implements MouseListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent( g );
 		
+		System.out.println(drawables.size());
 		for( int i = 0; i < drawables.size(); i++ ){
 			drawables.get( i ).draw( g );
 		}
 		
 	}
-	
 	
 	
 	@Override
@@ -82,6 +82,7 @@ public class Board extends JPanel implements MouseListener {
 	
 	public void gameStarted()  {
 		
+		this.setVisible(true);
 		this.repaint();
 	}
 
