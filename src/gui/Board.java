@@ -33,7 +33,7 @@ public class Board extends JPanel implements MouseListener {
 	
 	
 	
-	JPanel board = new JPanel();
+	//JPanel board = new JPanel();
 	
 	public Board() {
 		
@@ -47,7 +47,6 @@ public class Board extends JPanel implements MouseListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent( g );
 		
-		System.out.println(drawables.size());
 		for( int i = 0; i < drawables.size(); i++ ){
 			drawables.get( i ).draw( g );
 		}
@@ -62,14 +61,52 @@ public class Board extends JPanel implements MouseListener {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+	public void mouseReleased( MouseEvent mouseEvent ) {
+		
+		//If there's something held, let it go
+		if( ClickableButton.heldButton != null ) {
+			
+			//If we just released over the held button then we did a full click on it
+			if( ClickableButton.heldButton.pointWithin( mouseEvent.getX() ,  mouseEvent.getY() ) ){
+				
+				ClickableButton.heldButton.onClicked();
+				
+				ClickableButton.onMouseUp();
+				
+			}
+			
+		}
+		
+		//Redraw everything
+		this.repaint();
 		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+	public void mousePressed(MouseEvent mouseEvent) {
+	
+		//Right off the bat, if we are already holding something then we have a problem.
+		if( ClickableButton.heldButton != null ) {
+			//If this is the case, we'll do some error avoidance and just ignore this event.
+			
+			return;
+		}
+		
+		System.out.println();
+		//Check if we just started clicking any buttons
+		for(  int i = clickables.size()-1 ; i>= 0; i--) {
+			Clickable clickable = clickables.get(i);
+			
+			if( clickable.pointWithin( mouseEvent.getX() ,  mouseEvent.getY() ) ){
+				
+				clickable.onMouseDown();
+				break;
+			}
+			
+		}
+		
+		//Redraw everything
+		this.repaint();
 		
 	}
 
@@ -98,12 +135,38 @@ public class Board extends JPanel implements MouseListener {
 
 	public void tileCreation() {
 		
-		for(int col = 0; col < 20; col ++) {
-			for(int row = 0; row < 15; row ++) {
-				Drawable tile = new Drawable(row,col,50,50,"GUIimages/tile.png");
+		
+		int rowCount = 15;
+		int colCount = 20;
+		
+		int colWidth = 850/colCount;
+		int rowHeight = 650/rowCount;
+		
+		
+		for(int col = 0; col < colCount; col ++) {
+			for(int row = 0; row < rowCount; row ++) {
+				System.out.println(Integer.toString(col) + " " +Integer.toString(row));
+				ClickableButton tile = new ClickableButton(colWidth*col+75,rowHeight*row+75,45,45,"GUIimages/tile.png","GUIimages/tilePressed.png","GUIimages/tilePressed.png");
 			}
 		}
 	}
 	
+	
 		
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
