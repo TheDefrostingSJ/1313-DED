@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -24,7 +25,11 @@ public class Board extends JPanel implements MouseListener {
 	public static ArrayList<ClickableButton> buttons = new ArrayList<ClickableButton>();
 	public static ArrayList<Clickable> clickables = new ArrayList<Clickable>();
 
-	Drawable tile = new Drawable(0, 0, 23, 23, "GUIimages/tile.png");
+
+
+	Drawable floor = new Drawable(0, 0, 1000, 800, "GUIimages/floor.png");
+	
+	//Drawable tile = new Drawable(0, 0, 50, 50, "GUIimages/tile.png");
 	
 	
 	
@@ -34,7 +39,7 @@ public class Board extends JPanel implements MouseListener {
 		
 		setBackground(Color.LIGHT_GRAY);
 		setPreferredSize(new Dimension(1000,800));
-		
+		tileCreation();
 		
 	}
 	
@@ -82,10 +87,23 @@ public class Board extends JPanel implements MouseListener {
 	
 	public void gameStarted()  {
 		
-		this.setVisible(true);
-		this.repaint();
+		
+		JFrame frame = new JFrame();
+        frame.add(new Board());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationByPlatform(true);
+        frame.pack();
+        frame.setVisible(true);
 	}
 
+	public void tileCreation() {
+		
+		for(int col = 0; col < 20; col ++) {
+			for(int row = 0; row < 15; row ++) {
+				Drawable tile = new Drawable(row,col,50,50,"GUIimages/tile.png");
+			}
+		}
+	}
 	
 		
 }
