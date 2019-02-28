@@ -6,6 +6,8 @@ public class Driver {
 		// TODO Auto-generated method stub
 		
 		gui.Board board = new gui.Board();
+		
+		board.gameStarted();
 
 	}
 

@@ -15,6 +15,7 @@ import javax.swing.JPanel;
  *
  */
 
+@SuppressWarnings("serial")
 public class Board extends JPanel implements MouseListener {
 	
 	
@@ -23,19 +24,27 @@ public class Board extends JPanel implements MouseListener {
 	public static ArrayList<ClickableButton> buttons = new ArrayList<ClickableButton>();
 	public static ArrayList<Clickable> clickables = new ArrayList<Clickable>();
 
+	Drawable tile = new Drawable(0, 0, 23, 23, "GUIimages/tile.png");
+	
+	
+	
 	JPanel board = new JPanel();
 	
 	public Board() {
 		
 		setBackground(Color.LIGHT_GRAY);
 		setPreferredSize(new Dimension(1000,800));
+		
+		
 	}
 	
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent( g );
 		
-		
+		for( int i = 0; i < drawables.size(); i++ ){
+			drawables.get( i ).draw( g );
+		}
 		
 	}
 	
@@ -69,6 +78,11 @@ public class Board extends JPanel implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void gameStarted()  {
+		
+		this.repaint();
 	}
 
 	
