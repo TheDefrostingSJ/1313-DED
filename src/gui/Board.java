@@ -69,8 +69,8 @@ public class Board extends JPanel implements MouseListener {
 				if (c == matrix[i][t]) {
 					
 					ArrayList<Integer> coor = new ArrayList<Integer>();
-					coor.add(i+1);
 					coor.add(t+1);
+					coor.add(i+1);
 					return(coor);
 				}
 			}
@@ -178,10 +178,13 @@ public class Board extends JPanel implements MouseListener {
 				
 				
 				if(col > 7 && col < 11 && row > 5 && row < 9){
-					matrix[row][col] = new ClickableButton(colWidth*col+75,rowHeight*row+75,45,45,"GUIimages/tableTop.png","GUIimages/tableTop.png","GUIimages/tableTop.png");
+					//matrix[row][col] = new ClickableButton(colWidth*col+75,rowHeight*row+75,45,45,"GUIimages/tableTop.png","GUIimages/tableTop.png","GUIimages/tableTop.png");
+					Drawable temp = new Drawable(colWidth*col+75,rowHeight*row+75,45,45,"GUIimages/tableTop.png");
 				}else if(col%6 == 0 && row%7==0){
 					matrix[row][col] = new ClickableButton(colWidth*col+75,rowHeight*row+75,45,45,"GUIimages/tilePressed.png","GUIimages/tile.png","GUIimages/tilePressed.png");
-				} else {
+				}else if((col%6 == 0 && row%7==0) || (col%6 == 0 && row%7==0) || (col%6 == 0 && row%7==0) || (col%6 == 0 && row%7==0)) {
+					
+				}else {
 				matrix[row][col] = new ClickableButton(colWidth*col+75,rowHeight*row+75,45,45,"GUIimages/tile.png","GUIimages/tilePressed.png","GUIimages/tilePressed.png");
 				}
 			}
