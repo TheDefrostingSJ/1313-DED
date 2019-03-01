@@ -10,7 +10,7 @@ public class Driver {
 		
 		Board b = new Board();
 		
-		b.gameStarted();
+		
 		
 
 	}
